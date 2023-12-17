@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask SocketIO Example</title>
+</head>
+
+<body onkeypress="sendKeypress(event)">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+        const user = new URLSearchParams(window.location.search).get('user')
+
+        const socket2 = user === 'ahd' ? io.connect("http://127.0.0.1:5001") : undefined;
+
+        const sendKeypress = (event) => {
+            const key = String.fromCharCode(event.charCaode);
+            socket.emit('keypress', { 'key': key, 'user': user });
+        }
+
+        socket.on('keypress', (data) => {
+            const key = data['key'];
+            const senderUser = data['user'];
+            if (socket2) {
+                socket2.emit('receive_press', { 'key': key, 'user': senderUser });
+                console.log(`Key pressed by ${senderUser}: ${key}`);
+            }
+
+        });
+    </script>
+</body>
+
+</html>
