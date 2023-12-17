@@ -31,5 +31,5 @@ def handle_keypress(data):
 
 
 if __name__ == '__main__':
-    socketio_main.run(app, port=5000)
+    socketio_main.run(app, port=8000)
     # socketio_second.wait()
