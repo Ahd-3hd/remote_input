@@ -18,7 +18,7 @@
         const socket2 = user === 'ahd' ? io.connect("http://127.0.0.1:5001") : undefined;
 
         const sendKeypress = (event) => {
-            const key = String.fromCharCode(event.charCaode);
+            const key = String.fromCharCode(event.charCode);
             socket.emit('keypress', { 'key': key, 'user': user });
         }
 
