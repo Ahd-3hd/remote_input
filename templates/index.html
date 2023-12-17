@@ -11,7 +11,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
     <script>
-        const socket = io.connect('https://' + document.domain + ':' + location.port);
+        const socket = io.connect("https://remote-input-ahdhani.vercel.app");
         const user = new URLSearchParams(window.location.search).get('user')
 
         const socket2 = user === 'ahd' ? io.connect("http://127.0.0.1:5001") : undefined;
