@@ -10,25 +10,26 @@
 
 <body>
     <!-- onkeypress="sendKeypress(event)" -->
-    <input type="text" onkeyup="sendKeypress(event)" />
+    <input type="text" id="my_input" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
     <script>
-        const socket = io.connect("http://172-104-240-202.ip.linodeusercontent.com/");
-        // const socket = io.connect("http://127.0.0.1:5000");
+        // const socket = io.connect("http://172-104-240-202.ip.linodeusercontent.com/");
+        const socket = io.connect("http://127.0.0.1:5000");
 
         const user = new URLSearchParams(window.location.search).get('user')
 
         const socket2 = user === 'ahd' ? io.connect("http://127.0.0.1:5001") : undefined;
 
-        const sendKeypress = (event) => {
-            console.log(event)
-            const charCode = (typeof event.which == "undefined") ? event.keyCode : event.which;
-            const key = String.fromCharCode(charCode);
-            console.log(charCode)
+        const my_input = document.querySelector('#my_input');
 
-            socket.emit('keypress', { 'key': key, 'user': user });
-        }
+        my_input.addEventListener('keyup', (event) => {
+
+
+            console.log(event.key)
+            socket.emit('keypress', { 'key': event.key, 'user': user });
+        })
+
 
         socket.on('keypress', (data) => {
             const key = data['key'];
