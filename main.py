@@ -20,7 +20,7 @@ def index():
 def handle_keypress(data):
     key = data['key']
     user = data['user']
-    
+    print("HEREEE",key)
     if user == 'amooda':
         print(f'Key pressed by {user} and emitted: {key}')
         emit('keypress', {'key': key, 'user': user}, broadcast=True)
