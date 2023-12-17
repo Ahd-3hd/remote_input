@@ -29,8 +29,7 @@ def handle_keypress(data):
         # socketio_second.emit('keypress', {'key': key, 'user': user})
 
 
-# Your existing Flask-SocketIO code here
 
 if __name__ == '__main__':
-    socketio_main.run(app)
+    socketio_main.run(app, port=5000)
     # socketio_second.wait()
